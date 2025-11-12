@@ -9,19 +9,19 @@ st.set_page_config(
 
 # 페이지 로고
 st.logo(
-    "soundmind_CI_3.png",
+    "images/soundmind_CI_3.png",
     link="https://soundmind.life",
-    icon_image="soundmind_CI_3.png",
+    icon_image="images/soundmind_CI_3.png",
     size="large")
 
 # 메인 타이틀
-st.title("🧠 Soundmind AI System")
+st.title("🧠 Soundmind AI System 'SM-AI'")
 st.markdown("## LangChain 기반 AI 솔루션 플랫폼")
 st.markdown("---")
 
 # 프로젝트 소개
 st.markdown("""
-SOUNDMIND AI System은 LangChain과 OpenAI를 활용한 AI 솔루션 플랫폼입니다.
+Soundmind AI System은 LangChain과 OpenAI를 활용한 AI 솔루션 플랫폼입니다.\n
 좌측 사이드바에서 원하는 기능을 선택하여 사용할 수 있습니다.
 """)
 
@@ -80,7 +80,7 @@ with col2:
 
     st.page_link("pages/02_RAG_System.py", label="🚀 RAG System 사용하기", icon="📚")
 
-st.markdown("##")
+st.markdown("###")
 st.markdown("---")
 
 # 사용 방법 섹션
@@ -133,6 +133,6 @@ with st.expander("🛠️ 기술 스택", expanded=False):
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: gray;">
-    <p>🧠 SOUNDMIND AI System | Powered by LangChain & OpenAI</p>
+    <p>🧠 Soundmind AI System | Powered by LangChain & OpenAI</p>
 </div>
 """, unsafe_allow_html=True)

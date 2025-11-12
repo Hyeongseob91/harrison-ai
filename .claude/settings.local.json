@@ -5,7 +5,10 @@
       "Bash(poetry show:*)",
       "Bash(poetry run python:*)",
       "Bash(poetry lock:*)",
-      "Bash(poetry install:*)"
+      "Bash(poetry install:*)",
+      "Bash(tree:*)",
+      "Bash(xcopy:*)",
+      "Bash(robocopy:*)"
     ],
     "deny": [],
     "ask": []

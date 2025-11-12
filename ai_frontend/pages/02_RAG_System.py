@@ -16,25 +16,45 @@ from langchain_teddynote import logging
 
 # API KEY 정보로드
 load_dotenv()
-logging.langsmith("[SOUNDMIND] RAG")
+logging.langsmith("[Soundmind] RAG")
+
+# 로고
+st.logo(
+    "images/soundmind_CI_3.png",
+    link="https://soundmind.life",
+    icon_image="images/soundmind_CI_3.png",
+    size="large")
 
 
 # UI 구현부-1 (채팅창)
-st.title("[SOUNDMIND] RAG System")
+st.title("[Soundmind] RAG System")
 user_input = st.chat_input("궁금한 내용을 물어보세요")
 warning_msg = st.empty()
 
 
 # UI 구현부-2 (사이드바) 
 with st.sidebar:
-    clear_btn = st.button("대화 초기화")
-    uploade_file = st.file_uploader("파일 업로드", type=["PDF"])
+    uploade_file = st.file_uploader("", type=["PDF"])
+    st.markdown("## [RAG Custom]")
+    selected_model = st.selectbox(
+        "LLM 선택",
+        ["gpt-4.1", "gpt-4o", "gpt-4o-mini", "gpt-5", "gpt-5-mini", "gpt-5-nano"]
+    )
+    selected_api = st.selectbox(
+        "Documents Loader 선택", ["PDFPlumberLoader", "UpstageDocumentParseLoader"]
+    )
     prompt_files = glob.glob("prompts_rag/*.yaml")
-    selected_prompt = st.selectbox("원하는 프롬프트를 선택해주세요", prompt_files, index=0)
-    selected_rag = st.selectbox("RAG 선택", ["Naive RAG", "Advanced RAG", "Moduler RAG"])
-    selected_parser = st.selectbox("OutputParser 선택", ["StrOutputParser", "PydanticOutputParser", "JsonOutputParser"])
-    prompt_files = glob.glob("prompts/*.yaml")
-    selected_model = st.selectbox("LLM 선택", ["gpt-4.1", "gpt-4o", "gpt-4o-mini", "gpt-5", "gpt-5-mini","gpt-5-nano"])
+    selected_prompt = st.selectbox(
+        "Prompt 선택", prompt_files, index=0
+    )
+    selected_rag = st.selectbox(
+        "RAG 기술 선택", ["Naive RAG", "Advanced RAG", "Moduler RAG"]
+    )
+    selected_parser = st.selectbox(
+        "OutputParser 선택",
+        ["StrOutputParser"]
+    )
+    clear_btn = st.button("대화 초기화")
 
 
 # 초기화-1 (업로드 파일)
@@ -48,16 +68,16 @@ if not os.path.exists(".cache/embeddings"):
     os.mkdir(".cache/embeddings")
 
 # 초기화-2 (사용자 대화 메모리)
-if "messages" not in st.session_state:
-    st.session_state["messages"] = []
+if "rag_messages" not in st.session_state:
+    st.session_state["rag_messages"] = []
 
 # 초기화-3 (Chain 유지)
-if "chain" not in st.session_state:
-    st.session_state["chain"] = None
+if "rag_chain" not in st.session_state:
+    st.session_state["rag_chain"] = None
 
 # 초기화-4 (대화 초기화)
 if clear_btn:
-    st.session_state["messages"] = []
+    st.session_state["rag_messages"] = []
 
 # 업로드 파일 처리
 @st.cache_resource(show_spinner="업로드한 파일을 처리 중 입니다")
@@ -114,25 +134,25 @@ def create_chain(selected_prompt, retriever, model=selected_model):
 
 # 기능-1 (이전 대화 출력)
 def print_messages():
-    for chat_message in st.session_state["messages"]:
+    for chat_message in st.session_state["rag_messages"]:
         st.chat_message(chat_message.role).write(chat_message.content)
 
 
 # 기능-2 (새로운 메시지 추가)
 def add_message(role, message):
-    st.session_state["messages"].append(ChatMessage(role=role, content=message))
+    st.session_state["rag_messages"].append(ChatMessage(role=role, content=message))
 
 
 # 실행부
 if uploade_file:
     retriever = embed_file(uploade_file)        # RAG 1~5단계
     chain = create_chain(selected_prompt, retriever)             # RAG 6~8단계
-    st.session_state["chain"] = chain
+    st.session_state["rag_chain"] = chain
 
 print_messages()
 
 if user_input:
-    chain = st.session_state["chain"]
+    chain = st.session_state["rag_chain"]
 
     if chain is not None:
         st.chat_message("user").write(user_input)

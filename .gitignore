@@ -28,6 +28,7 @@
 */corpus/*
 */mlruns/*
 working/
+ai_test/
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
@@ -170,6 +171,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+/ai_backend/.venv
 
 # Spyder project settings
 .spyderproject
