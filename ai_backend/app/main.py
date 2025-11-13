@@ -11,7 +11,7 @@ import os
 app = FastAPI(
     title="SM-AI Backend",
     description="Soundmind AI System Backend API",
-    version="0.1.0"
+    version="0.1.2"
 )
 
 # ============================================

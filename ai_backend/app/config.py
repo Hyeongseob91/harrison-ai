@@ -24,7 +24,7 @@ LANGSMITH_API_KEY = os.getenv("LANGSMITH_API_KEY")
 
 LANGCHAIN_TRACING_V2 = os.getenv("LANGCHAIN_TRACING_V2", "true")
 LANGCHAIN_ENDPOINT = os.getenv("LANGCHAIN_ENDPOINT", "https://api.smith.langchain.com")
-LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT", "sm-ai-backend")
+LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT", "SM-AI")
 
 # ============================================
 # LLM 모델 설정
@@ -36,10 +36,10 @@ AVAILABLE_MODELS = [
     "gpt-4o-mini",
     "gpt-5",
     "gpt-5-mini",
-    "gpt-5-nano"
+    "gpt-5-nano",
 ]
 
-DEFAULT_MODEL = "gpt-4o"
+DEFAULT_MODEL = "gpt-4.1"
 DEFAULT_TEMPERATURE = 0.0
 
 # ============================================
@@ -57,7 +57,7 @@ CACHE_DIR = ".cache"
 FILES_DIR = os.path.join(CACHE_DIR, "files")
 EMBEDDINGS_DIR = os.path.join(CACHE_DIR, "embeddings")
 
-PROMPTS_DIR = "prompts"
+PROMPTS_DIR = "/prompts"
 CHATBOT_PROMPTS_DIR = os.path.join(PROMPTS_DIR, "chatbot")
 RAG_PROMPTS_DIR = os.path.join(PROMPTS_DIR, "rag")
 

@@ -94,7 +94,7 @@ def create_chatbot_chain(
         base_prompt = template_text.replace("{question}", "").strip()
         print(f"[DEBUG] No #Question: found, base_prompt: {repr(base_prompt)}")
 
-    # 역할 설정이 있으면 추가
+    # Prompt 정의
     if task and task.strip():
         system_message = (
             f"{base_prompt}\n\n"
@@ -106,7 +106,6 @@ def create_chatbot_chain(
 
     print(f"[DEBUG] system_message: {repr(system_message)}")
 
-    # 프롬프트 템플릿 구성
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", system_message),
