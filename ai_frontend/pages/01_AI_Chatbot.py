@@ -48,7 +48,7 @@ user_input = st.chat_input("궁금한 내용을 물어보세요")
 # UI 구현부-3 : 사이드바
 with st.sidebar:
     ## 초기 경로 설정 값 (Prompt)
-    prompt_files = glob.glob("../ai_backend/prompts/chatbot/*.yaml")
+    prompt_files = glob.glob("prompts/chatbot/*.yaml")
 
     ## 실제 UI 아이콘
     clear_btn = st.button("대화 초기화")
@@ -58,9 +58,6 @@ with st.sidebar:
 
 #======================================================================================================================
 
-# 세션 초기화
-SESSION_ID = st.session_state["chatbot_session_id"]
-
 # 세션 생성 유무 확인
 if "chatbot_session_id" not in st.session_state:
     st.session_state["chatbot_session_id"] = "single_user_chat_session"
@@ -68,6 +65,9 @@ if "chatbot_session_id" not in st.session_state:
 # 대화 기록 유무 확인
 if "chatbot_messages" not in st.session_state:
     st.session_state["chatbot_messages"] = []
+
+# 세션 초기화
+SESSION_ID = st.session_state["chatbot_session_id"]
 
 # 대화 기록 초기화
 if clear_btn:

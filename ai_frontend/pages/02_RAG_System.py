@@ -51,7 +51,7 @@ warning_msg = st.empty()
 # UI 구현부-3 : Sidebar
 with st.sidebar:
     ## 파일 업로더
-    uploade_file = st.file_uploader("", type=["PDF"])
+    uploade_file = st.file_uploader("문서를 업로드하세요", type=["pdf"])
 
     ## 초기 경로 설정 값 (Prompt)
     prompt_files = glob.glob("prompts/rag/*.yaml")
