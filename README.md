@@ -145,4 +145,3 @@ MIT License - [LICENSE](./LICENSE)
 ## 🔗 Links
 
 - [Soundmind](https://soundmind.life)
-- [TeddyNote LangChain](https://github.com/teddylee777/langchain-kr)
